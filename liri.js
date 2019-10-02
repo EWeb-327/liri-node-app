@@ -9,6 +9,16 @@ var fs = require("fs");
 var command = process.argv[2]
 var input = process.argv.slice(3).join(" ")
 
+function append(){
+    fs.appendFile("log.txt", text, function(err){
+        if (err) {
+            console.log(err);
+          }else{
+            return true
+          }
+    })
+}
+
 console.log("---------------")
 function run(){
 if (command === "concert-this") {
@@ -17,7 +27,9 @@ if (command === "concert-this") {
         .then(function (response) {
             for (var i = 0; i < 5; i++) {
                 var date = moment(response.data[i].datetime).format('MM/DD/YYYY')
-                console.log(`Name of Venue: ${response.data[i].venue.name}\nVenue Location: ${response.data[i].venue.city}, ${response.data[i].venue.region}\nDate of the Event: ${date}\n`)
+                var text = `Name of Venue: ${response.data[i].venue.name}\nVenue Location: ${response.data[i].venue.city}, ${response.data[i].venue.region}\nDate of the Event: ${date}\n`
+                console.log(text)
+                append()
             }
         })
         .catch(function (error) {
