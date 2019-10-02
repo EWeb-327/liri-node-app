@@ -10,7 +10,7 @@ var command = process.argv[2]
 var input = process.argv.slice(3).join(" ")
 
 console.log("---------------")
-
+function run(){
 if (command === "concert-this") {
     axios
         .get("https://rest.bandsintown.com/artists/" + input + "/events?app_id=codingbootcamp")
@@ -22,17 +22,12 @@ if (command === "concert-this") {
         })
         .catch(function (error) {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 console.log(error.response.data);
                 console.log(error.response.status);
                 console.log(error.response.headers);
             } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an object that comes back with details pertaining to the error that occurred.
                 console.log(error.request);
             } else {
-                // Something happened in setting up the request that triggered an Error
                 console.log("Error", error.message);
             }
             console.log(error.config);
@@ -70,8 +65,7 @@ if (command === "concert-this") {
                 console.log(data);
             });
     }
-}
-if (command === "movie-this") {
+}else if (command === "movie-this") {
     var queryUrl = "http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=trilogy";
     if (!input) {
         queryUrl = "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
@@ -98,19 +92,9 @@ if (command === "movie-this") {
         axios.get(queryUrl).then(
             function (response) {
                 console.log(`Title: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`)
-                //Title: ${response.data.Title}
-                //Year: ${response.data.Year}
-                //IMDB Rating: ${response.data.Ratings[0].Value}
-                //Rotten Tomatoes Rating: ${response.data.Ratings[1].Value}
-                //Produced in: ${response.data.Country}
-                //Language: ${response.data.Language}
-                //Plot: ${response.data.Plot}
-                //Actors: ${response.data.Actors}
             }
         ).catch(function (error) {
             if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
                 console.log("---------------Data---------------");
                 console.log(error.response.data);
                 console.log("---------------Status---------------");
@@ -118,25 +102,23 @@ if (command === "movie-this") {
                 console.log("---------------Status---------------");
                 console.log(error.response.headers);
             } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an object that comes back with details pertaining to the error that occurred.
                 console.log(error.request);
             } else {
-                // Something happened in setting up the request that triggered an Error
                 console.log("Error", error.message);
             }
             console.log(error.config);
         });
     }
-}
-//  if (command === "do-what-it-says"){
-//     fs.readFile("random.txt", "utf8", function(error,data){
-//         if (error) {
-//             return console.log(error)
-//         } else{
-//             var dataArr = data.split(",")
-//             command = dataArr[0]
-//             input = dataArr[1]
-//         }
-//     })
-// }
+}else if (command === "do-what-it-says"){
+    fs.readFile("random.txt", "utf8", function(error,data){
+        if (error) {
+            return console.log(error)
+        } else{
+            var dataArr = data.split(",")
+            command = dataArr[0]
+            input = dataArr[1]
+            run()
+        }
+    })
+}}
+run()
