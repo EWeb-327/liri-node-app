@@ -53,7 +53,9 @@ if (command === "concert-this") {
             .search(
                 { type: 'track', query: "The Sign" })
             .then(function (response) {
-                console.log(`\n---------------\nArtist(s): ${response.tracks.items[5].album.artists[0].name}\nSong Name: ${response.tracks.items[5].name}\nPreview Link: ${response.tracks.items[5].external_urls.spotify}\nAlbum: ${response.tracks.items[5].album.name}\n`)
+                var text = `\n---------------\nArtist(s): ${response.tracks.items[5].album.artists[0].name}\nSong Name: ${response.tracks.items[5].name}\nPreview Link: ${response.tracks.items[5].external_urls.spotify}\nAlbum: ${response.tracks.items[5].album.name}\n`
+                console.log(text)
+                append(text)
             }
             )
             .catch(function (err, data) {
@@ -88,7 +90,9 @@ if (command === "concert-this") {
         queryUrl = "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
         axios.get(queryUrl).then(
             function (response) {
-                console.log(`\n---------------\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`)
+                var text = `\n---------------\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`
+                console.log(text)
+                append(text)
             }
         ).catch(function (error) {
             if (error.response) {
@@ -108,7 +112,7 @@ if (command === "concert-this") {
     } else {
         axios.get(queryUrl).then(
             function (response) {
-                var text = `\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`
+                var text = `\n---------------\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`
                 console.log(text)
                 append(text)
             }
