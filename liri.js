@@ -20,14 +20,17 @@ function append(text){
 }
 
 console.log("---------------")
+console.log("Choose a command:\nconcert-this (artist name)\nspotify-this-song (song name)\nmovie-this (name of a movie)\ndo-what-it-says *picks randomly for you*")
+
 function run(){
 if (command === "concert-this") {
     axios
         .get("https://rest.bandsintown.com/artists/" + input + "/events?app_id=codingbootcamp")
         .then(function (response) {
+            console.log(input)
             for (var i = 0; i < 5; i++) {
                 var date = moment(response.data[i].datetime).format('MM/DD/YYYY')
-                var text = `Name of Venue: ${response.data[i].venue.name}\nVenue Location: ${response.data[i].venue.city}, ${response.data[i].venue.region}\nDate of the Event: ${date}\n`
+                var text = `\n---------------\nName of Venue: ${response.data[i].venue.name}\nVenue Location: ${response.data[i].venue.city}, ${response.data[i].venue.region}\nDate of the Event: ${date}\n`
                 console.log(text)
                 append(text)
             }
@@ -50,7 +53,7 @@ if (command === "concert-this") {
             .search(
                 { type: 'track', query: "The Sign" })
             .then(function (response) {
-                console.log(`Artist(s): ${response.tracks.items[5].album.artists[0].name}\nSong Name: ${response.tracks.items[5].name}\nPreview Link: ${response.tracks.items[5].external_urls.spotify}\nAlbum: ${response.tracks.items[5].album.name}\n`)
+                console.log(`\n---------------\nArtist(s): ${response.tracks.items[5].album.artists[0].name}\nSong Name: ${response.tracks.items[5].name}\nPreview Link: ${response.tracks.items[5].external_urls.spotify}\nAlbum: ${response.tracks.items[5].album.name}\n`)
             }
             )
             .catch(function (err, data) {
@@ -66,7 +69,7 @@ if (command === "concert-this") {
                 { type: 'track', query: input })
             .then(function (response) {
                 for (var i = 0; i < 5; i++) {
-                    var text = `Artist(s): ${response.tracks.items[i].album.artists[0].name}\nSong Name: ${response.tracks.items[i].name}\nPreview Link: ${response.tracks.items[i].external_urls.spotify}\nAlbum: ${response.tracks.items[i].album.name}\n`
+                    var text = `\n---------------\nArtist(s): ${response.tracks.items[i].album.artists[0].name}\nSong Name: ${response.tracks.items[i].name}\nPreview Link: ${response.tracks.items[i].external_urls.spotify}\nAlbum: ${response.tracks.items[i].album.name}\n`
                     console.log(text)
                     append(text)
                 }
@@ -85,7 +88,7 @@ if (command === "concert-this") {
         queryUrl = "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=trilogy";
         axios.get(queryUrl).then(
             function (response) {
-                console.log(`Title: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`)
+                console.log(`\n---------------\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`)
             }
         ).catch(function (error) {
             if (error.response) {
@@ -105,7 +108,7 @@ if (command === "concert-this") {
     } else {
         axios.get(queryUrl).then(
             function (response) {
-                var text = `Title: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`
+                var text = `\nTitle: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nProduced in: ${response.data.Country}\nLanguage: ${response.data.Language}\nPlot: ${response.data.Plot}\nActors: ${response.data.Actors}\n`
                 console.log(text)
                 append(text)
             }
