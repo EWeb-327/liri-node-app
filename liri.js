@@ -71,7 +71,12 @@ if (command === "concert-this") {
                 { type: 'track', query: input })
             .then(function (response) {
                 for (var i = 0; i < 5; i++) {
-                    var text = `\n---------------\nArtist(s): ${response.tracks.items[i].album.artists[0].name}\nSong Name: ${response.tracks.items[i].name}\nPreview Link: ${response.tracks.items[i].external_urls.spotify}\nAlbum: ${response.tracks.items[i].album.name}\n`
+                    var artists = response.tracks.items[i].album.artists
+                    var listArtists = []
+                    for (var j = 0; j<artists.length; j++){
+                        listArtists.push(artists[j].name)
+                    }
+                    var text = `\n---------------\nArtist(s): ${listArtists.join(", ")}\nSong Name: ${response.tracks.items[i].name}\nPreview Link: ${response.tracks.items[i].external_urls.spotify}\nAlbum: ${response.tracks.items[i].album.name}\n`
                     console.log(text)
                     append(text)
                 }
