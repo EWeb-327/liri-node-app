@@ -6,6 +6,7 @@ This is an app that can be used through Node in your terminal. There are four se
 * 2)spotify-this-song (song name)
 * 3)movie-this (movie name)
 * 4)do-what-it-says (picks a random input for you)
+
 Based on the command and input the app calls the relevant API to pull the information. The information console.logs to the terminal screen and is also stored to the log.txt file. The fourth command pulls the text from the random.txt file and runs the command and input.
 
 ##This app uses the following:##
